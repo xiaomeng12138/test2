@@ -10,6 +10,7 @@
 </head>
 <body>
         <center><h2 class="lead">登录</h2></center>
+        <center><img src="https://mp.weixin.qq.com/cgi-bin/showqrcode?ticket=gQGV7zwAAAAAAAAAAS5odHRwOi8vd2VpeGluLnFxLmNvbS9xLzAyWlNqcWN4c05hTmUxOTFrdHh1Y0IAAgQFlB1eAwQ8AAAA" width="200px"></center>
         <center><p style="color:red;">
             @if(!empty($errors->first()))
                 {{$errors->first()}}
