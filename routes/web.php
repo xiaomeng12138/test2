@@ -28,4 +28,4 @@ Route::middleware('login')->group(function(){
 //微信
 Route::any('login/index','LoginController@index');
 
-Route::any('delcache','LoginControlle@delcache');   //清除缓存
+Route::any('delcache','LoginController@delcache');
