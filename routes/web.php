@@ -15,8 +15,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/login','UserController@index'); //普通登录页面
-Route::get('/wechat_login','UserController@wechat_login');  //微信扫码页面
+Route::any('/login','UserController@index'); //普通登录页面
+Route::any('/wechat_login','UserController@wechat_login');  //微信扫码页面
 Route::any('/check_login','UserController@check_login');  //检测用户是否扫码
 Route::post('/login_do','UserController@login_do');
 Route::any('/quit','UserController@quit');  //退出
