@@ -42,6 +42,10 @@ class LoginController extends Controller
 
 
     }
+    //清除 所有缓存
+    function delcache(){
+        Cache::flush();
+    }
 
    
 }

@@ -23,8 +23,9 @@ class UserController extends Controller
     //检测用户是否扫描二维码
     function check_login(){
         $scend_id=request()->input('code');
-        $code=Cache::get($scend_id);
-        if(!$code){
+        // $code=Cache::get($scend_id);
+
+        if(!Cache::has($scend_id)){
             return json_encode(['code'=>2,'msg'=>'没有扫描']);die;
         }
         return json_encode(['code'=>1,'msg'=>'扫码登录成功']);

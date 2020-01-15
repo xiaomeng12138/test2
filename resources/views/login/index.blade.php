@@ -38,6 +38,7 @@
         <div class="col-sm-offset-2 col-sm-10">
             <button type="submit" class="btn btn-default btn-success">登录</button>
             <a href="{{url('/wechat_login')}}">点击使用微信登录</a>
+        
         </div>
 
     </div>
