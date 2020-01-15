@@ -11,6 +11,7 @@ class Common extends Controller
     //获取Access_Token
     public static function Access_Token(){
         $token=Redis::get('Access_Token');
+        // Redis::del('Access_Token');die;  //清除Access_Token
         if(empty($token)) {
             $url = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=" . self::appid . "&secret=" . self::appsecret;
             $res = Common::curlGet($url);
@@ -20,6 +21,29 @@ class Common extends Controller
         }
         return $token;
     }
+
+    public static function GetQrcode(){
+        $scene_id=md5(uniqid().rand(1000,9999));
+        $token=self::Access_Token();
+        $url="https://api.weixin.qq.com/cgi-bin/qrcode/create?access_token={$token}";
+        $data='{"action_name": "QR_STR_SCENE", "action_info": {"scene": {"scene_id": '.$scene_id.'}}';
+        $res=Common::curlPost($url,$data);
+        $ticket_info=json_decode($res,true);
+        $ticket=$ticket_info['ticket'];
+        return 'https://mp.weixin.qq.com/cgi-bin/showqrcode?ticket='.$ticket;
+    }
+
+        //回复用户文本消息
+    public static function responseText($xmlObj,$msg)
+     {
+        echo "<xml>
+              <ToUserName><![CDATA[".$xmlObj->FromUserName."]]></ToUserName>
+              <FromUserName><![CDATA[".$xmlObj->ToUserName."]]></FromUserName>
+              <CreateTime>".time()."</CreateTime>
+              <MsgType><![CDATA[text]]></MsgType>
+              <Content><![CDATA[".$msg."]]></Content>
+              </xml>";
+      }
 
 
   public static  function curlGet($url)

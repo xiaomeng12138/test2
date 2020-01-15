@@ -5,10 +5,12 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\IndexUserModel;
 use Session;
+use App\Http\Controllers\Common;
 class UserController extends Controller
 {
     function index(){
-        return view('login.index');
+        $qrcode=Common::GetQrcode();
+        return view('login.index',['qrcode'=>$qrcode]);
     }
 
     function login_do(){
