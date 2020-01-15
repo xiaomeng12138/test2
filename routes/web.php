@@ -15,15 +15,15 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/login','UserController@index');
+Route::get('/login','UserController@index'); //普通登录页面
+Route::get('/wechat_login','UserController@wechat_login');  //微信扫码页面
+Route::any('/check_login','UserController@check_login');  //检测用户是否扫码
 Route::post('/login_do','UserController@login_do');
-Route::any('/quit','UserController@quit');
+Route::any('/quit','UserController@quit');  //退出
 
 Route::middleware('login')->group(function(){
-    Route::get('/list','UserController@list');
+    Route::get('/list','UserController@list');  //列表
 });
 
-//微信扫码登录
+//微信
 Route::any('login/index','LoginController@index');
-Route::any('/GetQrcode','LoginController@GetQrcode');  //二维码
-// Route::any('/Access_Token','LoginController@Access_Token');

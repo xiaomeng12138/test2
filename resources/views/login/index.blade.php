@@ -10,7 +10,6 @@
 </head>
 <body>
         <center><h2 class="lead">登录</h2></center>
-        <center><img src="{{$qrcode}}" width="200px"></center>
         <center><p style="color:red;">
             @if(!empty($errors->first()))
                 {{$errors->first()}}
@@ -38,7 +37,9 @@
     <div class="form-group">
         <div class="col-sm-offset-2 col-sm-10">
             <button type="submit" class="btn btn-default btn-success">登录</button>
+            <a href="{{url('/wechat_login')}}">点击使用微信登录</a>
         </div>
+
     </div>
 </form>
 </body>

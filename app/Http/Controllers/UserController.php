@@ -6,13 +6,31 @@ use Illuminate\Http\Request;
 use App\IndexUserModel;
 use Session;
 use App\Http\Controllers\Common;
+use Illuminate\Support\Facades\Redis;
 class UserController extends Controller
 {
     function index(){
-        $qrcode=Common::GetQrcode();
-        return view('login.index',['qrcode'=>$qrcode]);
+        return view('login.index');
     }
 
+    function wechat_login(){
+        $scene_id=md5(uniqid().rand(1000,9999));
+        echo $scene_id;
+        $qrcode=Common::GetQrcode($scene_id);
+        return view('login.wechat_login',['qrcode'=>$qrcode,'code'=>$scene_id]);
+    }
+
+    //检测用户是否扫描二维码
+    function check_login(){
+        $scend_id=request()->input('code');
+        $code=Redis::get($scend_id);
+        if(!$code){
+            return json_encode(['code'=>2,'msg'=>'没有扫描']);die;
+        }
+        return json_encode(['code'=>1,'msg'=>'扫码登录成功']);
+    }
+
+    //普通正常登录
     function login_do(){
         $user_name=request()->input('user_name');
         $password=request()->input('password');

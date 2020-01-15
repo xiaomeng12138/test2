@@ -8,9 +8,9 @@ use Illuminate\Support\Facades\Redis;
 class LoginController extends Controller
 {
     function index(Request $request){
-        // if(!empty($request->echostr)){
-        //  echo $request->echostr;die;  //介入接口
-        // }
+        if(!empty($request->echostr)){
+         echo $request->echostr;die;  //介入接口
+        }
         $xmlstr=file_get_contents("php://input");  //接收xml数据
         $xmlobj=simplexml_load_string($xmlstr);  //将xml数据转换成对象
         //判断用户是否关注

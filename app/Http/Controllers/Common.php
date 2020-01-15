@@ -22,8 +22,7 @@ class Common extends Controller
         return $token;
     }
 
-    public static function GetQrcode(){
-        $scene_id=md5(uniqid().rand(1000,9999));
+    public static function GetQrcode($scene_id){ 
         $token=self::Access_Token();
         $url="https://api.weixin.qq.com/cgi-bin/qrcode/create?access_token={$token}";
         $data='{"action_name": "QR_STR_SCENE", "action_info": {"scene": {"scene_id": '.$scene_id.'}}';
