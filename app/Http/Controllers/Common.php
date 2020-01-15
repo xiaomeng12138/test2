@@ -25,7 +25,16 @@ class Common extends Controller
     public static function GetQrcode($scene_id){ 
         $token=self::Access_Token();
         $url="https://api.weixin.qq.com/cgi-bin/qrcode/create?access_token={$token}";
-        $data='{"expire_seconds": 604800, "action_name": "QR_STR_SCENE", "action_info": {"scene": {"scene_id": '.$scene_id.'}}}';
+        $data=[
+            "expire_seconds"=>120,
+             "action_name"=>"QR_STR_SCENE",
+             "action_info"=>[
+                "scene"=>[
+                    "scene_str"=>$scene_id
+                 ]
+             ]
+        ];
+        $data=json_encode($data);
         $res=Common::curlPost($url,$data);
         $ticket_info=json_decode($res,true);
         $ticket=$ticket_info['ticket'];
