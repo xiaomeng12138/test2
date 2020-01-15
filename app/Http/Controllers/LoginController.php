@@ -12,6 +12,7 @@ class LoginController extends Controller
          echo $request->echostr;die;  //介入接口
         }
         $xmlstr=file_get_contents("php://input");  //接收xml数据
+        file_put_contents('1.txt', $xmlstr);
         $xmlobj=simplexml_load_string($xmlstr);  //将xml数据转换成对象
         //判断用户是否关注
         if($xmlobj->MsgType == 'event'  && $xmlobj->Event == 'subscribe'){
