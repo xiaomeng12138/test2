@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Common;
-use Illuminate\Support\Facades\Redis;
+use Illuminate\Support\Facades\Cache;
 class LoginController extends Controller
 {
     function index(Request $request){
@@ -22,7 +22,7 @@ class LoginController extends Controller
             $key=(string)$xmlobj->EventKey;
             if($key){
                 $key=ltrim($key,'qrscene_');
-                Redis::set($key,$openid,20);
+                Cache::put($key,$openid,20);
                 Common::responseText($xmlobj,'正在登陆请稍后');die;
             }
         }
@@ -35,7 +35,7 @@ class LoginController extends Controller
             
             $key=(string)$xmlobj->EventKey;
             if($key){
-                Redis::set($key,$openid,20);
+                Cache::put($key,$openid,20);
                 Common::responseText($xmlobj,'正在登陆请稍后');die;
             }
         }

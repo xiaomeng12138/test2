@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\IndexUserModel;
 use Session;
 use App\Http\Controllers\Common;
-use Illuminate\Support\Facades\Redis;
+use Illuminate\Support\Facades\Cache;
 class UserController extends Controller
 {
     function index(){
@@ -23,7 +23,7 @@ class UserController extends Controller
     //检测用户是否扫描二维码
     function check_login(){
         $scend_id=request()->input('code');
-        $code=Redis::get($scend_id);
+        $code=Cache::get($scend_id);
         if(!$code){
             return json_encode(['code'=>2,'msg'=>'没有扫描']);die;
         }
